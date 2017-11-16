@@ -43,8 +43,11 @@ public class Media implements MediaListener {
 
     public Media(Context context) {
         PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
-        mLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "cn");
-        mLock.setReferenceCounted(false);
+        if (pm != null) {
+            mLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "cn");
+            mLock.setReferenceCounted(false);
+        }
+
         mVideoPlayer = new VideoPlayer();
         mAudioPlayer = new AudioPlayer();
     }
