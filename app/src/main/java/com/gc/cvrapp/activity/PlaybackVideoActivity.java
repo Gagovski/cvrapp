@@ -344,7 +344,7 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
     private Media.PlaybackCallback Icallback = new Media.PlaybackCallback() {
 
         @Override
-        public void onPlaybackPicture(String picname, Bitmap bitmap) {}
+        public void onPlaybackPhoto(String picname, Bitmap bitmap) {}
 
         @Override
         public void onPlaybackState(int state) {

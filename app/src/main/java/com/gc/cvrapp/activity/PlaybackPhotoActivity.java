@@ -198,7 +198,7 @@ public class PlaybackPhotoActivity extends AppCompatActivity implements CvrServi
 
     private Media.PlaybackCallback Icallback = new Media.PlaybackCallback() {
         @Override
-        public void onPlaybackPicture(String picname, Bitmap bitmap) {
+        public void onPlaybackPhoto(String picname, Bitmap bitmap) {
             LogUtil.i(TAG, "media playback pic " + picname);
             isDone = true;
             if (mPicPool.isEmpty()) {

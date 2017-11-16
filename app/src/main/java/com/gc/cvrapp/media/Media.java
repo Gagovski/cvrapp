@@ -276,7 +276,7 @@ public class Media implements MediaListener {
 
     @Override
     public void onPhoto(String picname, Bitmap bitmap) {
-        IplaybackCb.onPlaybackPicture(picname, bitmap);
+        IplaybackCb.onPlaybackPhoto(picname, bitmap);
     }
 
     /**
@@ -304,7 +304,7 @@ public class Media implements MediaListener {
          * @param picname photo name
          * @param bitmap photo bitmap data
          */
-        void onPlaybackPicture(String picname, Bitmap bitmap);
+        void onPlaybackPhoto(String picname, Bitmap bitmap);
 
         /**
          * call back playback state
