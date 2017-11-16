@@ -103,8 +103,8 @@ public class PlaybackPhotoActivity extends AppCompatActivity implements CvrServi
     private static class PlaybackHandler extends Handler {
         private final WeakReference<PlaybackPhotoActivity> mActivity;
 
-        public PlaybackHandler(PlaybackPhotoActivity activity) {
-            mActivity = new WeakReference<PlaybackPhotoActivity>(activity);
+        PlaybackHandler(PlaybackPhotoActivity activity) {
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override

@@ -29,6 +29,8 @@ import com.gc.cvrapp.media.Media;
 import com.gc.cvrapp.media.Media.MediaPlaybackState;
 import com.gc.cvrapp.utils.LogUtil;
 
+import java.lang.ref.WeakReference;
+
 public class PlaybackVideoActivity extends AppCompatActivity implements CvrServiceConnection,
              SurfaceHolder.Callback,
              SeekBar.OnSeekBarChangeListener {
@@ -273,57 +275,71 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
         mDialog.show();
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new PlaybackHandler(this);
+
+    private static class PlaybackHandler extends Handler {
+        private final WeakReference<PlaybackVideoActivity> mActivity;
+
+        PlaybackHandler(PlaybackVideoActivity activity) {
+            mActivity = new WeakReference<>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            PlaybackVideoActivity activity = mActivity.get();
+            if (null == activity) {
+                return;
+            }
             switch (msg.what) {
                 case MsgCode.MsgStart:
-                    mTitle.setText(mVideoList.getFilelist().get(mCurVideoId));
-                    mButtonPlay.setText("pause");
+                    activity.mTitle.setText(activity.mVideoList.getFilelist().get(activity.mCurVideoId));
+                    activity.mButtonPlay.setText("pause");
                     break;
 
                 case MsgCode.MsgRestart:
-                    mTitle.setText(mVideoList.getFilelist().get(mCurVideoId));
-                    mCvr.playbackVideo(mMedia, mVideoList.getFilelist().get(mCurVideoId));
-                    mButtonPlay.setText("pause");
+                    activity.mTitle.setText(activity.mVideoList.getFilelist().get(activity.mCurVideoId));
+                    activity.mCvr.playbackVideo(activity.mMedia, activity.mVideoList.getFilelist().get(activity.mCurVideoId));
+                    activity.mButtonPlay.setText("pause");
                     break;
 
                 case MsgCode.MsgStop:
-                    mButtonPlay.setText("play");
+                    activity.mButtonPlay.setText("play");
                     break;
 
                 case MsgCode.MsgPause:
-                    mButtonPlay.setText("play");
-                    pause();
+                    activity.mButtonPlay.setText("play");
+                    activity.pause();
                     break;
 
                 case MsgCode.MsgContinue:
-                    mButtonPlay.setText("pause");
-                    play();
+                    activity.mButtonPlay.setText("pause");
+                    activity.play();
                     break;
 
                 case MsgCode.MsgPrevNext:
-                    prevnext();
+                    activity.prevnext();
                     break;
 
                 case MsgCode.MsgSeek:
-                    seek();
+                    activity.seek();
                     break;
 
                 case MsgCode.MsgStep:
-                    mSeekBar.setProgress(msg.arg1);
-                    mTimer.setText(timestamp((msg.arg1 * mMedia.getPlaybackSamples() / 100) * 30));
+                    activity.mSeekBar.setProgress(msg.arg1);
+                    activity.mTimer.setText(activity.timestamp((msg.arg1 * activity.mMedia.getPlaybackSamples() / 100) * 30));
                     break;
 
                 case MsgCode.MsgError:
-                    error();
+                    activity.error();
                     break;
 
                 default:
                     break;
             }
+
         }
-    };
+    }
 
     private Media.PlaybackCallback Icallback = new Media.PlaybackCallback() {
 

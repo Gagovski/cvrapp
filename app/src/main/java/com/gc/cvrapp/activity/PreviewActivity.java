@@ -254,8 +254,8 @@ public class PreviewActivity extends AppCompatActivity implements CvrServiceConn
     private static class PreviewHandler extends Handler {
         private final WeakReference<PreviewActivity> mActivity;
 
-        public PreviewHandler(PreviewActivity activity) {
-            mActivity = new WeakReference<PreviewActivity>(activity);
+        PreviewHandler(PreviewActivity activity) {
+            mActivity = new WeakReference<>(activity);
         }
 
         @Override
