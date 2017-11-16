@@ -9,7 +9,7 @@ import com.gc.cvrapp.cvr.commands.DeleteFileCommand;
 import com.gc.cvrapp.cvr.commands.FormatSDCommand;
 import com.gc.cvrapp.cvr.commands.GetFileListCommand;
 import com.gc.cvrapp.cvr.commands.LockFileCommand;
-import com.gc.cvrapp.cvr.commands.PlaybackPicCommand;
+import com.gc.cvrapp.cvr.commands.PlaybackPhotoCommand;
 import com.gc.cvrapp.cvr.commands.PlaybackVideoCommand;
 import com.gc.cvrapp.cvr.commands.PlaybackVideoPauseCommand;
 import com.gc.cvrapp.cvr.commands.PlaybackVideoSeekCommand;
@@ -194,7 +194,7 @@ public abstract class Cvr {
          * @param picname photo name
          * @param bitmap bitmap data
          */
-        void onPicture(String picname, Bitmap bitmap);
+        void onPhoto(String picname, Bitmap bitmap);
     }
 
     /**
@@ -373,7 +373,7 @@ public abstract class Cvr {
      * @param filename the photo name
      */
     public void playbackPic(MediaListener listener, String filename) {
-        PlaybackPicCommand command = new PlaybackPicCommand(this, listener, filename);
+        PlaybackPhotoCommand command = new PlaybackPhotoCommand(this, listener, filename);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
     }

@@ -11,14 +11,14 @@ import com.gc.cvrapp.utils.LogUtil;
 
 import java.nio.ByteBuffer;
 
-public class PlaybackPicCommand extends Command {
+public class PlaybackPhotoCommand extends Command {
 
     private String mPicname;
     private ByteBuffer mPayload;
     private MediaListener mListener;
-    private static final String TAG = "PlaybackPicCommand";
+    private static final String TAG = "PlaybackPhotoCommand";
 
-    public PlaybackPicCommand(Cvr cvr, MediaListener listener, String picname) {
+    public PlaybackPhotoCommand(Cvr cvr, MediaListener listener, String picname) {
         super(cvr);
         mPicname = picname;
         mPayload = ByteBuffer.allocate(64);
@@ -53,7 +53,7 @@ public class PlaybackPicCommand extends Command {
         if (code == CvrConstants.ResponseCode.PlaybackPic) {
             LogUtil.i(TAG, "playbackPic decodeData");
             Bitmap bitmap = BitmapFactory.decodeByteArray(payLoad.array(), 0, payloadLen);
-            mListener.onPicture(mPicname, bitmap);
+            mListener.onPhoto(mPicname, bitmap);
         }
     }
 }

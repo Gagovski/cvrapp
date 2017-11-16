@@ -275,7 +275,7 @@ public class Media implements MediaListener {
     }
 
     @Override
-    public void onPicture(String picname, Bitmap bitmap) {
+    public void onPhoto(String picname, Bitmap bitmap) {
         IplaybackCb.onPlaybackPicture(picname, bitmap);
     }
 
