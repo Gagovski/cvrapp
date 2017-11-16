@@ -25,6 +25,8 @@ import com.gc.cvrapp.media.Media;
 import com.gc.cvrapp.media.Media.PreviewCallback;
 import com.gc.cvrapp.utils.LogUtil;
 
+import java.lang.ref.WeakReference;
+
 public class PreviewActivity extends AppCompatActivity implements CvrServiceConnection, SurfaceHolder.Callback {
     private Media mMedia;
     private CvrSettings mCvrSettings;
@@ -247,31 +249,43 @@ public class PreviewActivity extends AppCompatActivity implements CvrServiceConn
         }
     };
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new PreviewHandler(this);
+
+    private static class PreviewHandler extends Handler {
+        private final WeakReference<PreviewActivity> mActivity;
+
+        public PreviewHandler(PreviewActivity activity) {
+            mActivity = new WeakReference<PreviewActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MsgCode.MsgLocation:
-                    Location location = (Location)msg.obj;
-                    mTextLocation.setText("[Latitude: " + String.valueOf(location.getLatitude()) +
-                    " Longtitude: " + String.valueOf(location.getLongitude()) + "]");
-                    break;
-                case MsgCode.MsgStartRecord:
-                    break;
-                case MsgCode.MsgStopRecord:
-                    mTextRecording.setVisibility(View.INVISIBLE);
-                    break;
-                case MsgCode.MsgCvrDetach:
-                case MsgCode.MsgNoCvrFound:
-                    dialog.show();
-                    break;
-                case MsgCode.MsgRecording:
-                    break;
-                default:
-                    break;
+            PreviewActivity activity = mActivity.get();
+            if (activity != null) {
+                // ...
+                switch (msg.what) {
+                    case MsgCode.MsgLocation:
+                        Location location = (Location)msg.obj;
+                        activity.mTextLocation.setText("[Latitude: " + String.valueOf(location.getLatitude()) +
+                                " Longtitude: " + String.valueOf(location.getLongitude()) + "]");
+                        break;
+                    case MsgCode.MsgStartRecord:
+                        break;
+                    case MsgCode.MsgStopRecord:
+                        activity.mTextRecording.setVisibility(View.INVISIBLE);
+                        break;
+                    case MsgCode.MsgCvrDetach:
+                    case MsgCode.MsgNoCvrFound:
+                        activity.dialog.show();
+                        break;
+                    case MsgCode.MsgRecording:
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-    };
+    }
 
 //    private CvrService.LocationCallback locateCallback = new CvrService.LocationCallback() {
 //        @Override
