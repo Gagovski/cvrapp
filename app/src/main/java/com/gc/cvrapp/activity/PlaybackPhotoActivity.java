@@ -24,6 +24,7 @@ import com.gc.cvrapp.media.Media;
 import com.gc.cvrapp.media.photo.PicCachePool;
 import com.gc.cvrapp.utils.LogUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 public class PlaybackPhotoActivity extends AppCompatActivity implements CvrServiceConnection {
@@ -97,25 +98,35 @@ public class PlaybackPhotoActivity extends AppCompatActivity implements CvrServi
         LogUtil.i(TAG, "onCvrDisconnected");
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new PlaybackHandler(this);
+
+    private static class PlaybackHandler extends Handler {
+        private final WeakReference<PlaybackPhotoActivity> mActivity;
+
+        public PlaybackHandler(PlaybackPhotoActivity activity) {
+            mActivity = new WeakReference<PlaybackPhotoActivity>(activity);
+        }
+
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case MsgCode.MsgCvrAttach:
-                    initPhotoPager();
-                    break;
+            PlaybackPhotoActivity activity = mActivity.get();
+            if (activity != null) {
+                switch (msg.what) {
+                    case MsgCode.MsgCvrAttach:
+                        activity.initPhotoPager();
+                        break;
 
-                case MsgCode.MsgPicture:
-                    ImageView imageView = (ImageView) mCurrentView.findViewById(R.id.image_photo);
-                    imageView.setImageBitmap((Bitmap) msg.obj);
-                    break;
+                    case MsgCode.MsgPicture:
+                        ImageView imageView = (ImageView) activity.mCurrentView.findViewById(R.id.image_photo);
+                        imageView.setImageBitmap((Bitmap) msg.obj);
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
-    };
+    }
 
     private void initPhotoPager() {
         LayoutInflater layoutInflater = getLayoutInflater();
