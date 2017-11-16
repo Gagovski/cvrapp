@@ -26,6 +26,7 @@ import com.gc.cvrapp.utils.LogUtil;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayoutDirection;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -222,38 +223,52 @@ public class ListVideoFragment extends Fragment implements PlaylistAdapter.Adapt
         }
     };
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new ListHandler(this);
+
+    private static class ListHandler extends Handler {
+        private final WeakReference<ListVideoFragment> mFragment;
+
+        ListHandler(ListVideoFragment fragment) {
+            mFragment = new WeakReference<>(fragment);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+
+            ListVideoFragment fragment = mFragment.get();
+            if (null == fragment) {
+                return;
+            }
+
             switch (msg.what) {
                 case MsgCode.MsgUpdateFileList:
 //                    mVideoList.clear();
-                    mVideoList.addAll((List<String>) msg.obj);
-                    mAdapter.notifyDataSetChanged();
+                    fragment.mVideoList.addAll((List<String>) msg.obj);
+                    fragment.mAdapter.notifyDataSetChanged();
                     break;
                 case MsgCode.MsgLock:
                     LogUtil.i(TAG, "Lock: " + (String)msg.obj);
-                    mVideoList.set(mPosition, (String)msg.obj);
-                    mAdapter.notifyDataSetChanged();
+                    fragment.mVideoList.set(fragment.mPosition, (String)msg.obj);
+                    fragment.mAdapter.notifyDataSetChanged();
                     break;
 
                 case MsgCode.MsgUnLock:
                     LogUtil.i(TAG, "unLock: " + (String)msg.obj);
-                    mVideoList.set(mPosition, (String)msg.obj);
-                    mAdapter.notifyDataSetChanged();
+                    fragment.mVideoList.set(fragment.mPosition, (String)msg.obj);
+                    fragment.mAdapter.notifyDataSetChanged();
                     break;
 
                 case MsgCode.MsgDeleteFile:
-                    mVideoList.remove(mPosition);
-                    mAdapter.notifyDataSetChanged();
+                    fragment.mVideoList.remove(fragment.mPosition);
+                    fragment.mAdapter.notifyDataSetChanged();
                     break;
 
                 default:
                     break;
             }
         }
-    };
+    }
 
     private FragmentCallback Icallback = new FragmentCallback() {
         @Override
