@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="com.ogaclejapan.smarttablayout:library-1.6.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/caches/transforms-1/files-1.1/library-1.6.1.aar/35d6cd40a8d6d347e6fb0924c0bf22a7/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/caches/transforms-1/files-1.1/library-1.6.1.aar/35d6cd40a8d6d347e6fb0924c0bf22a7/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/caches/modules-2/files-2.1/com.ogaclejapan.smarttablayout/library/1.6.1/1fb717e91e5e524e467b946ee0e0b2182ebacd26/library-1.6.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/caches/modules-2/files-2.1/com.ogaclejapan.smarttablayout/library/1.6.1/a557ec1dc81f8153f92f8c9dc3d5071a12a89df5/library-1.6.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

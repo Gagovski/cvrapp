@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">cvrapp</string>
+    <string name="key_record_time">record_time</string>
+    <string name="def_record_time">3min</string>
+    <string-array name="time_list">
+        <item>1min</item>
+        <item>2min</item>
+        <item>3min</item>
+        <item>5min</item>
+    </string-array>
+    <string name="key_record_voice">voice_en</string>
+    <string name="key_log_en">log_en</string>
+
+    <!-- Title -->
+    <string name="title_screen_slide">Screen Slide</string>
+
+    <!-- Actions -->
+    <string name="action_toggle">Toggle indicator</string>
+    <string name="action_add_item">Add item</string>
+    <string name="action_remove_item">Remove item</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_info">Photo info</string>
+    <string name="action_photo">View photo</string>
+
+</resources>

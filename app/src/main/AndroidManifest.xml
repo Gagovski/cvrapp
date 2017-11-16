@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gc.cvrapp">
+
+    <uses-feature android:name="android.hardware.usb.*" />
+    <uses-feature android:name="android.hardware.usb.host" />
+
+    <uses-permission android:name="android.hardware.usb.host" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/cvr"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/cvr"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:largeHeap="true">
+        <activity
+            android:name=".activity.PreviewActivity"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.PlaylistActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlaybackVideoActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.PlaybackPhotoActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activity.LogActivity"
+            android:screenOrientation="landscape" />
+
+        <service android:name=".service.UsbCvrService" />
+        <service android:name=".service.NetCvrService" />
+
+    </application>
+
+</manifest>

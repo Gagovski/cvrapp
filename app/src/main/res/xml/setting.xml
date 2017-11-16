@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="Settings">
+    <PreferenceCategory android:title="Settings">
+        <ListPreference
+            android:defaultValue="@string/def_record_time"
+            android:dialogTitle="record time"
+            android:entries="@array/time_list"
+            android:entryValues="@array/time_list"
+            android:key="@string/key_record_time"
+            android:title="record time" />
+
+        <SwitchPreference
+            android:defaultValue="0"
+            android:key="@string/key_record_voice"
+            android:title="voice enable" />
+
+
+        <SwitchPreference
+            android:defaultValue="0"
+            android:key="@string/key_log_en"
+            android:title="log enable" />
+
+        <Preference
+            android:key="format_sd"
+            android:title="format sd" />
+
+        <Preference
+            android:key="show_log"
+            android:title="show log" />
+    </PreferenceCategory>
+</PreferenceScreen>
