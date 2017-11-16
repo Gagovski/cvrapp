@@ -27,6 +27,7 @@ import com.gc.cvrapp.cvr.Cvr;
 import com.gc.cvrapp.cvr.Cvr.FileListener;
 import com.gc.cvrapp.utils.LogUtil;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -164,26 +165,40 @@ public class ListPhotoFragment extends Fragment implements PlaylistAdapter.Adapt
         public void onUnLockFile(String item) {}
     };
 
-    private Handler mHandler = new Handler() {
+    private Handler mHandler = new ListHandler(this);
+
+    private static class ListHandler extends Handler {
+        private final WeakReference<ListPhotoFragment> mFragment;
+
+        ListHandler(ListPhotoFragment fragment) {
+            mFragment = new WeakReference<>(fragment);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+
+            ListPhotoFragment fragment = mFragment.get();
+            if (null == fragment) {
+                return;
+            }
+
             switch (msg.what) {
                 case MsgCode.MsgUpdateFileList:
 //                    mPiclist.clear();
-                    mPiclist.addAll((List<String>)msg.obj);
-                    mAdapter.notifyDataSetChanged();
+                    fragment.mPiclist.addAll((List<String>)msg.obj);
+                    fragment.mAdapter.notifyDataSetChanged();
                     break;
 
                 case MsgCode.MsgDeleteFile:
-                    mPiclist.remove(mPosition);
-                    mAdapter.notifyDataSetChanged();
+                    fragment.mPiclist.remove(fragment.mPosition);
+                    fragment.mAdapter.notifyDataSetChanged();
                     break;
                 default:
                     break;
             }
         }
-    };
+    }
 
     private FragmentCallback Icallback = new FragmentCallback() {
         @Override
