@@ -88,7 +88,14 @@ public class CvrServiceManager implements ServiceConnection {
      * the callback interface of CvrService
      * */
     public interface CvrServiceConnection {
+        /** connect cvr service
+         * @param cvr cvr device
+         * @param service usb or net service
+         */
         void onCvrConnected(Cvr cvr, CvrService service);
+        /** disconnect cvr service
+         * @param service usb or net service
+         */
         void onCvrDisconnected(CvrService service);
     }
 

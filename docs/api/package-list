@@ -1,0 +1,12 @@
+com.gc.cvrapp
+com.gc.cvrapp.activity
+com.gc.cvrapp.cvr
+com.gc.cvrapp.cvr.commands
+com.gc.cvrapp.cvr.netcvr
+com.gc.cvrapp.cvr.usbcvr
+com.gc.cvrapp.media
+com.gc.cvrapp.media.audio
+com.gc.cvrapp.media.photo
+com.gc.cvrapp.media.video
+com.gc.cvrapp.service
+com.gc.cvrapp.utils
