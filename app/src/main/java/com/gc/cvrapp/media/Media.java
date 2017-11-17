@@ -393,12 +393,17 @@ public class Media implements MediaListener {
 
     /**
      * set media playback state
-     * @param state playback state The state are:
-     *              {MediaPlaybackState.Start,MediaPlaybackState.Continue,
-     *              MediaPlaybackState.Pause,MediaPlaybackState.Stop,
-     *              MediaPlaybackState.Seek,MediaPlaybackState.Restart,
-     *              MediaPlaybackState.Release,MediaPlaybackState.PrevNext,
-     *              MediaPlaybackState.Error.}
+     * @param state playback state The state are:{
+     *                  MediaPlaybackState.Start,
+     *                  MediaPlaybackState.Continue,
+     *                  MediaPlaybackState.Pause,
+     *                  MediaPlaybackState.Stop,
+     *                  MediaPlaybackState.Seek,
+     *                  MediaPlaybackState.Restart,
+     *                  MediaPlaybackState.Release,
+     *                  MediaPlaybackState.PrevNext,
+     *                  MediaPlaybackState.Error.
+     *              }
      */
     public void setPlaybackState(int state) {
         switch (state) {
