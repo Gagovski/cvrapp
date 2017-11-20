@@ -156,7 +156,7 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
 
     public void onClickPrevVideo(View view) {
         LogUtil.i(TAG, "play prev");
-        if (mVideoList.getFilelist().isEmpty()) {
+        if (mVideoList.getFilelist().isEmpty() || (MediaPlaybackState.PrevNext == mMedia.getPlaybackState())) {
             return;
         }
         -- mCurVideoId;
@@ -169,7 +169,7 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
 
     public void onClickNextVideo(View view) {
         LogUtil.i(TAG, "play next");
-        if (mVideoList.getFilelist().isEmpty()) {
+        if (mVideoList.getFilelist().isEmpty() || (MediaPlaybackState.PrevNext == mMedia.getPlaybackState())) {
             return;
         }
         ++ mCurVideoId;
@@ -298,9 +298,9 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
                     break;
 
                 case MsgCode.MsgRestart:
+                    activity.mButtonPlay.setText("pause");
                     activity.mTitle.setText(activity.mVideoList.getFilelist().get(activity.mCurVideoId));
                     activity.mCvr.playbackVideo(activity.mMedia, activity.mVideoList.getFilelist().get(activity.mCurVideoId));
-                    activity.mButtonPlay.setText("pause");
                     break;
 
                 case MsgCode.MsgStop:
