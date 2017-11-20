@@ -43,7 +43,7 @@ public abstract class CvrService extends Service {
      * get cvr media
      * @return cvr media instant
      */
-    public Media getCvrMedia() {
+    public Media getMedia() {
         return media;
     }
 

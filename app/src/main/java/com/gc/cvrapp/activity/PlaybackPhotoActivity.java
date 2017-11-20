@@ -80,7 +80,7 @@ public class PlaybackPhotoActivity extends AppCompatActivity implements CvrServi
     @Override
     public void onCvrConnected(Cvr cvr, CvrService service) {
         LogUtil.i(TAG, "onCvrConnected");
-        mMedia = service.getCvrMedia();
+        mMedia = service.getMedia();
         if (null != mMedia) {
             mMedia.setPlaybackCallback(Icallback);
         }

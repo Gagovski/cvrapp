@@ -170,7 +170,7 @@ public class PreviewActivity extends AppCompatActivity implements CvrServiceConn
             dialog.hide();
         }
 
-        mMedia = service.getCvrMedia();
+        mMedia = service.getMedia();
         if (null == mMedia) {
             return;
         }
