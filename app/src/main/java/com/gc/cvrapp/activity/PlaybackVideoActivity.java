@@ -305,7 +305,7 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
                 case MsgCode.MsgRestart:
                     activity.mButtonPlay.setText("pause");
                     activity.mTitle.setText(activity.mVideoList.getFilelist().get(activity.mCurVideoId));
-                    sendEmptyMessageDelayed(MsgCode.MsgPlay, 1000);
+                    sendEmptyMessageDelayed(MsgCode.MsgPlay, 500);
                     break;
 
                 case MsgCode.MsgStop:
