@@ -201,6 +201,11 @@ public abstract class Cvr {
      * interface FileListListener for cvr file list
      */
     public interface FileListListener {
+        /**
+         * listen file list
+         * @param mp4list video file list
+         * @param piclist photo file list
+         */
         void onFileList(List<String> mp4list, List<String> piclist);
     }
 

@@ -29,42 +29,45 @@ public class MsgCode {
     /** MsgCode: cvr capture a picture */
     public static final int MsgPicture          = 8;
 
+    /** MsgCode: cvr play */
+    public static final int MsgPlay             = 10;
+
     /** MsgCode: cvr start preview or playback */
-    public static final int MsgStart            = 9;
+    public static final int MsgStart            = 11;
 
     /** MsgCode: cvr restart playback */
-    public static final int MsgRestart          = 10;
+    public static final int MsgRestart          = 12;
 
     /** MsgCode: cvr stop preview or playback */
-    public static final int MsgStop             = 11;
+    public static final int MsgStop             = 13;
 
     /** MsgCode: cvr pause playback */
-    public static final int MsgPause            = 12;
+    public static final int MsgPause            = 14;
 
     /** MsgCode: cvr continue playback */
-    public static final int MsgContinue         = 13;
+    public static final int MsgContinue         = 15;
 
     /** MsgCode: cvr playback next or previous video */
-    public static final int MsgPrevNext         = 14;
+    public static final int MsgPrevNext         = 16;
 
     /** MsgCode: cvr playback video sample step progressing */
-    public static final int MsgStep             = 15;
+    public static final int MsgStep             = 17;
 
     /** MsgCode: cvr playback video seek */
-    public static final int MsgSeek             = 16;
+    public static final int MsgSeek             = 18;
 
     /** MsgCode: cvr start recording trip video */
-    public static final int MsgStartRecord      = 17;
+    public static final int MsgStartRecord      = 19;
 
     /** MsgCode: cvr stop recording trip video */
-    public static final int MsgStopRecord       = 18;
+    public static final int MsgStopRecord       = 20;
 
     /** MsgCode: cvr is recording trip video now */
-    public static final int MsgRecording        = 19;
+    public static final int MsgRecording        = 21;
 
     /** MsgCode: cvr location */
-    public static final int MsgLocation         = 20;
+    public static final int MsgLocation         = 22;
 
     /** MsgCode: cvr somethings wrong happen */
-    public static final int MsgError            = 21;
+    public static final int MsgError            = 23;
 }

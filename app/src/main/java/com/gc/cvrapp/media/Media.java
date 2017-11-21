@@ -17,8 +17,6 @@ import com.gc.cvrapp.utils.LogUtil;
 
 import java.nio.ByteBuffer;
 
-import static android.content.Context.POWER_SERVICE;
-
 /**
  * Base class for cvr media, provide user preview, playback, take photo.
  */
@@ -42,7 +40,7 @@ public class Media implements MediaListener {
     private static final String TAG = "Media";
 
     public Media(Context context) {
-        PowerManager pm = (PowerManager) context.getSystemService(POWER_SERVICE);
+        PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
         if (pm != null) {
             mLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "cn");
             mLock.setReferenceCounted(false);

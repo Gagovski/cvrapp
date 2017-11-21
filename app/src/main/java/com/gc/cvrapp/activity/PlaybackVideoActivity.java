@@ -287,11 +287,16 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+
             PlaybackVideoActivity activity = mActivity.get();
             if (null == activity) {
                 return;
             }
             switch (msg.what) {
+                case MsgCode.MsgPlay:
+                    activity.mCvr.playbackVideo(activity.mMedia, activity.mVideoList.getFilelist().get(activity.mCurVideoId));
+                    break;
+
                 case MsgCode.MsgStart:
                     activity.mTitle.setText(activity.mVideoList.getFilelist().get(activity.mCurVideoId));
                     activity.mButtonPlay.setText("pause");
@@ -300,7 +305,7 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
                 case MsgCode.MsgRestart:
                     activity.mButtonPlay.setText("pause");
                     activity.mTitle.setText(activity.mVideoList.getFilelist().get(activity.mCurVideoId));
-                    activity.mCvr.playbackVideo(activity.mMedia, activity.mVideoList.getFilelist().get(activity.mCurVideoId));
+                    sendEmptyMessageDelayed(MsgCode.MsgPlay, 1000);
                     break;
 
                 case MsgCode.MsgStop:
