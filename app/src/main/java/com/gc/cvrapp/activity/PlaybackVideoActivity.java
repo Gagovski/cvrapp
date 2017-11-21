@@ -44,7 +44,8 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
     private SurfaceView mSurfaceView;
     private View mControllerView;
     private SeekBar mSeekBar;
-    private Dialog mDialog;
+    private Dialog mErrorDialog;
+    private Dialog mWarnDialog;
     private TextView mTimer;
     private TextView mTitle;
     private int mStep = 0;
@@ -79,7 +80,8 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
         //Todo seekbar
         mSeekBar = (SeekBar) findViewById(R.id.seekBar);
         mSeekBar.setOnSeekBarChangeListener(this);
-        mDialog = new AlertDialog.Builder(this).setTitle("Error:").setMessage("mp4 file error cannot playback!").create();
+        mErrorDialog = new AlertDialog.Builder(this).setTitle("Error:").setMessage("mp4 file error cannot playback!").create();
+        mWarnDialog = new AlertDialog.Builder(this).setTitle("Warning").setMessage("Please connect your cvr device.").create();
 
         //Todo open SurfaceView
         mSurfaceView = (SurfaceView) findViewById(R.id.playback_surface);
@@ -116,8 +118,12 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
     protected void onDestroy() {
         super.onDestroy();
         LogUtil.i(TAG, "onDestroy");
-        if (null != mDialog) {
-            mDialog.dismiss();
+        if (null != mErrorDialog) {
+            mErrorDialog.dismiss();
+        }
+
+        if (null != mWarnDialog) {
+            mWarnDialog.dismiss();
         }
     }
 
@@ -138,7 +144,10 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
 
     @Override
     public void onCvrDisconnected(CvrService service) {
-
+        if (null != mMedia) {
+            mMedia.stopPlayback();
+        }
+        mHandler.sendMessage(mHandler.obtainMessage(MsgCode.MsgCvrDetach));
     }
 
     @Override
@@ -272,7 +281,11 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
 
     private void error() {
         Log.e(TAG, "mp4 file error cannot playback!");
-        mDialog.show();
+        mErrorDialog.show();
+    }
+
+    private void warn() {
+        mWarnDialog.show();
     }
 
     private Handler mHandler = new PlaybackHandler(this);
@@ -337,6 +350,10 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
 
                 case MsgCode.MsgError:
                     activity.error();
+                    break;
+
+                case MsgCode.MsgCvrDetach:
+                    activity.warn();
                     break;
 
                 default:
