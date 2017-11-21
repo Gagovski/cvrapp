@@ -138,6 +138,9 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
         mCvr = cvr;
         if (null != mCvr) {
             //Todo cvr send playbackVideo command
+            if (mWarnDialog.isShowing()) {
+                mWarnDialog.hide();
+            }
             mCvr.playbackVideo(mMedia, mVideoList.getFilelist().get(mCurVideoId));
         }
     }
