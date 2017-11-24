@@ -1,5 +1,7 @@
 package com.gc.cvrapp.cvr;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
@@ -19,7 +21,7 @@ public abstract class CvrConnection <E> {
      * @param timeout the transfer out timeout
      * @return the out data size
      */
-    public abstract int transferOut(Object endpoint, byte[] buffer, int length, int timeout);
+    public abstract int transferOut(@NonNull Object endpoint, @NonNull byte[] buffer, int length, int timeout);
 
     /**
      * cvr transfer in data
@@ -29,7 +31,7 @@ public abstract class CvrConnection <E> {
      * @param timeout the transfer in timeout
      * @return the in data size
      */
-    public abstract int transferIn(Object endpoint, byte[] buffer, int maxLength, int timeout);
+    public abstract int transferIn(@NonNull Object endpoint, @NonNull byte[] buffer, int maxLength, int timeout);
 
     /**
      * cvr transfer in data
@@ -38,7 +40,7 @@ public abstract class CvrConnection <E> {
      * @param maxLength the transfer in data length
      * @return the in data size
      */
-    public abstract int transferIn(Object endpoint, byte[] buffer, int maxLength);
+    public abstract int transferIn(@NonNull Object endpoint, @NonNull byte[] buffer, int maxLength);
 
     /**
      * cvr get max packet size
@@ -56,7 +58,7 @@ public abstract class CvrConnection <E> {
      * cvr get out endpoint
      * @return the out endpoint object
      */
-    public abstract Object getOut();
+    public abstract @NonNull Object getOut();
 
     /**
      * cvr get in endpoint
@@ -68,5 +70,5 @@ public abstract class CvrConnection <E> {
      * cvr get in endpoints
      * @return the in endpoint objects
      */
-    public abstract List<E> getIns();
+    public abstract @NonNull List<E> getIns();
 }
