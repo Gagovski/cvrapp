@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 
 import com.gc.cvrapp.AppConfig;
 import com.gc.cvrapp.cvr.Cvr;
@@ -103,7 +104,7 @@ public class CvrServiceManager implements ServiceConnection {
      * set CvrServiceManager callback interface
      * @param callback the CvrServiceConnection callback interface
      */
-    public void setCallback(CvrServiceConnection callback) {
+    public void setCallback(@NonNull CvrServiceConnection callback) {
         mCallback = callback;
     }
 

@@ -6,6 +6,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.gc.cvrapp.cvr.Cvr;
 import com.gc.cvrapp.cvr.Cvr.CvrListener;
@@ -37,13 +38,13 @@ public abstract class CvrService extends Service {
      * get cvr device
      * @return cvr device instant
      */
-    public abstract Cvr getCvr();
+    public abstract @NonNull Cvr getCvr();
 
     /**
      * get cvr media
      * @return cvr media instant
      */
-    public Media getMedia() {
+    public @NonNull Media getMedia() {
         return media;
     }
 
@@ -51,7 +52,7 @@ public abstract class CvrService extends Service {
      * set cvr callback listener
      * @param listener the cvr CvrListener listener
      */
-    public abstract void setCvrListener(CvrListener listener);
+    public abstract void setCvrListener(@NonNull CvrListener listener);
 
     /**
      * init cvr

@@ -1,6 +1,7 @@
 package com.gc.cvrapp.cvr;
 
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 
 import com.gc.cvrapp.cvr.commands.CapturePicCommand;
 import com.gc.cvrapp.cvr.commands.Command;
@@ -249,7 +250,7 @@ public abstract class Cvr {
      * cvr take photo
      * @param listener the cvr MediaListener
      */
-    public void capturePic(MediaListener listener) {
+    public void capturePic(@NonNull MediaListener listener) {
         CapturePicCommand command = new CapturePicCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -259,7 +260,7 @@ public abstract class Cvr {
      * cvr start preview
      * @param listener the cvr MediaListener
      */
-    public void startPreview(MediaListener listener) {
+    public void startPreview(@NonNull MediaListener listener) {
         StartPreviewCommand command = new StartPreviewCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -269,7 +270,7 @@ public abstract class Cvr {
      * cvr stop preview
      * @param listener the cvr MediaListener
      */
-    public void stopPreview(MediaListener listener) {
+    public void stopPreview(@NonNull MediaListener listener) {
         StopPreviewCommand command = new StopPreviewCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -279,7 +280,7 @@ public abstract class Cvr {
      * cvr start recording
      * @param listener the cvr MediaListener
      */
-    public void startRecord(MediaListener listener) {
+    public void startRecord(@NonNull MediaListener listener) {
         StartRecordCommand command = new StartRecordCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -289,7 +290,7 @@ public abstract class Cvr {
      * cvr stop recording
      * @param listener the cvr MediaListener
      */
-    public void stopRecord(MediaListener listener) {
+    public void stopRecord(@NonNull MediaListener listener) {
         StopRecordCommand command = new StopRecordCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -299,7 +300,7 @@ public abstract class Cvr {
      * cvr settings
      * @param settings the cvr settings parameter
      */
-    public void setting(CvrSettings settings) {
+    public void setting(@NonNull CvrSettings settings) {
         LogUtil.i(TAG, "setting");
         SettingCommand command = new SettingCommand(this, settings);
         queueMsg(command);
@@ -310,7 +311,7 @@ public abstract class Cvr {
      * cvr get file list
      * @param listener the cvr FileListListener
      */
-    public void getFileList(FileListListener listener) {
+    public void getFileList(@NonNull FileListListener listener) {
         LogUtil.i(TAG, "getFileList");
         GetFileListCommand command = new GetFileListCommand(this, listener);
         queueMsg(command);
@@ -322,7 +323,7 @@ public abstract class Cvr {
      * @param listener the cvr MediaListener
      * @param filename the video filename
      */
-    public void playbackVideo(MediaListener listener, String filename) {
+    public void playbackVideo(@NonNull MediaListener listener, @NonNull String filename) {
         LogUtil.i(TAG, "playbackVideo");
         PlaybackVideoCommand command = new PlaybackVideoCommand(this, listener, filename);
         queueMsg(command);
@@ -333,7 +334,7 @@ public abstract class Cvr {
      * cvr continue playback video
      * @param listener the cvr MediaListener
      */
-    public void playbackVideoContinue(MediaListener listener) {
+    public void playbackVideoContinue(@NonNull MediaListener listener) {
         LogUtil.i(TAG, "playbackVideo play");
         PlaybackVideoPauseCommand command = new PlaybackVideoPauseCommand(this, listener);
         queueMsg(command);
@@ -344,7 +345,7 @@ public abstract class Cvr {
      * cvr pause playback video
      * @param listener the cvr MediaListener
      */
-    public void playbackVideoPause(MediaListener listener) {
+    public void playbackVideoPause(@NonNull MediaListener listener) {
         LogUtil.i(TAG, "playbackVideo pause");
         PlaybackVideoPauseCommand command = new PlaybackVideoPauseCommand(this, listener);
         queueMsg(command);
@@ -355,7 +356,7 @@ public abstract class Cvr {
      * cvr stop playback video
      * @param listener the cvr MediaListener
      */
-    public void playbackVideoStop(MediaListener listener) {
+    public void playbackVideoStop(@NonNull MediaListener listener) {
         PlaybackVideoStopCommand command = new PlaybackVideoStopCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -366,7 +367,7 @@ public abstract class Cvr {
      * @param listener the cvr MediaListener
      * @param sample the video sample
      */
-    public void playbackVideoSeek(MediaListener listener, int sample) {
+    public void playbackVideoSeek(@NonNull MediaListener listener, int sample) {
         PlaybackVideoSeekCommand command = new PlaybackVideoSeekCommand(this, listener, sample);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -377,7 +378,7 @@ public abstract class Cvr {
      * @param listener the cvr MediaListener
      * @param filename the photo name
      */
-    public void playbackPic(MediaListener listener, String filename) {
+    public void playbackPic(@NonNull MediaListener listener, @NonNull String filename) {
         PlaybackPhotoCommand command = new PlaybackPhotoCommand(this, listener, filename);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
@@ -406,7 +407,7 @@ public abstract class Cvr {
      * @param listener the cvr FileListener
      * @param item the file item name
      */
-    public void deleteFile(FileListener listener, String item) {
+    public void deleteFile(@NonNull FileListener listener, @NonNull String item) {
         LogUtil.i(TAG, "deleteFile");
         DeleteFileCommand command = new DeleteFileCommand(this, listener, item);
         queueMsg(command);
@@ -418,7 +419,7 @@ public abstract class Cvr {
      * @param listener the cvr FileListener
      * @param item the file item name
      */
-    public void lockFile(FileListener listener, String item) {
+    public void lockFile(@NonNull FileListener listener, @NonNull String item) {
         LogUtil.i(TAG, "LockFile");
         LockFileCommand command = new LockFileCommand(this, listener, item);
         queueMsg(command);
@@ -430,7 +431,7 @@ public abstract class Cvr {
      * @param listener the cvr FileListener
      * @param item the file item name
      */
-    public void unlockFile(FileListener listener, String item) {
+    public void unlockFile(@NonNull FileListener listener, @NonNull String item) {
         LogUtil.i(TAG, "unLockFile");
         UnLockFileCommand command = new UnLockFileCommand(this, listener, item);
         queueMsg(command);
@@ -442,7 +443,7 @@ public abstract class Cvr {
      * set cvr listener
      * @param listener the cvr CvrListener
      */
-    public void setListener(CvrListener listener) {
+    public void setListener(@NonNull CvrListener listener) {
         mListener = listener;
     }
 

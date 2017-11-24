@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.support.annotation.NonNull;
 import android.view.Surface;
 
 import com.gc.cvrapp.cvr.Cvr.MediaListener;
@@ -135,7 +136,7 @@ public class Media implements MediaListener {
      * set media callback for preview
      * @param cb the Preview callback interface
      */
-    public void setPreviewCallback(PreviewCallback cb) {
+    public void setPreviewCallback(@NonNull PreviewCallback cb) {
         IpreviewCb = cb;
     }
 
@@ -281,7 +282,7 @@ public class Media implements MediaListener {
      *  media start preview
      *  @param surface the Surface object for managing screen
      */
-    public void startPreview(Surface surface) {
+    public void startPreview(@NonNull Surface surface) {
         isPreviewing = true;
         mVideoPlayer.start(surface, null);
     }
@@ -321,7 +322,7 @@ public class Media implements MediaListener {
      * set media callback for playback
      * @param cb the Playback callback
      */
-    public void setPlaybackCallback(PlaybackCallback cb) {
+    public void setPlaybackCallback(@NonNull PlaybackCallback cb) {
         IplaybackCb = cb;
     }
 
@@ -329,7 +330,7 @@ public class Media implements MediaListener {
      * start media playback
      * @param surface the Surface object for managing screen
      */
-    public void startPlayback(Surface surface) {
+    public void startPlayback(@NonNull Surface surface) {
         LogUtil.i(TAG, "startPlayback");
         mSurface = surface;
         mVideoPlayer.start(surface, mVideoInfo);
@@ -360,7 +361,7 @@ public class Media implements MediaListener {
      * media continue playback
      * @param surface the Surface object for managing screen
      */
-    public void continuePlayback(Surface surface) {
+    public void continuePlayback(@NonNull Surface surface) {
 //        mVideoPlayer.start(surface, mVideoInfo);
 
         mSurface = surface;

@@ -2,6 +2,7 @@ package com.gc.cvrapp.media.video;
 
 import android.media.MediaCodec;
 import android.media.MediaFormat;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.Surface;
 
@@ -38,7 +39,7 @@ public class VideoPlayer {
      * @param surface managing the screen
      * @param videoInfo video info
      */
-    public void start(Surface surface, VideoInfo videoInfo) {
+    public void start(@NonNull Surface surface, VideoInfo videoInfo) {
         LogUtil.i(TAG, "start");
 
         if (null == mDecoder) {
