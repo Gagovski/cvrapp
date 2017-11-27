@@ -1,5 +1,7 @@
 package com.gc.cvrapp.utils;
 
+import android.support.annotation.Nullable;
+
 import org.jcodec.codecs.h264.H264Utils;
 
 import java.nio.ByteBuffer;
@@ -23,6 +25,7 @@ public class H264DecodeUtil {
      * @param in input h264 seq header buffer
      * @return the sps buffer
      */
+    @Nullable
     public static byte[] getSps(ByteBuffer in) {
         byte[] seq = in.array();
         byte[] sps = null;
@@ -67,6 +70,7 @@ public class H264DecodeUtil {
      * @param in input h264 seq header buffer
      * @return the pps buffer
      */
+    @Nullable
     public static byte[] getPps(ByteBuffer in) {
         byte[] pps = null;
         byte[] seq = in.array();
@@ -116,6 +120,7 @@ public class H264DecodeUtil {
      * @param type TYPE_SPS, TYPE_PPS
      * @return the sps or pps
      */
+    @Nullable
     public static byte[] getNalu(ByteBuffer in, int type) {
         byte[] nalu = null;
         byte[] seq  = in.array();
