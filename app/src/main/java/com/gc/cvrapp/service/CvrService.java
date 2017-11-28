@@ -38,13 +38,13 @@ public abstract class CvrService extends Service {
      * get cvr device
      * @return cvr device instant
      */
-    public abstract @NonNull Cvr getCvr();
+    public abstract Cvr getCvr();
 
     /**
      * get cvr media
      * @return cvr media instant
      */
-    public @NonNull Media getMedia() {
+    public Media getMedia() {
         return media;
     }
 
@@ -52,7 +52,7 @@ public abstract class CvrService extends Service {
      * set cvr callback listener
      * @param listener the cvr CvrListener listener
      */
-    public abstract void setCvrListener(@NonNull CvrListener listener);
+    public abstract void setCvrListener(CvrListener listener);
 
     /**
      * init cvr
