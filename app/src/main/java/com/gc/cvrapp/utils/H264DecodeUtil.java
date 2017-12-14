@@ -44,8 +44,7 @@ public class H264DecodeUtil {
         int firstNaluSize = 0;
         for (int i = firstStartcodeIndex + 4; i < firstStartcodeIndex + seq.length - 4; i ++) {
             if ((0x00 == seq[i + 0]) && (0x00 == seq[i + 1]) && (0x00 == seq[i + 2]) && (0x01 == seq[i + 3])) {
-                if (firstNaluSize == 0)
-                {
+                if (firstNaluSize == 0) {
                     firstNaluSize = i - firstStartcodeIndex;
                 }
 
@@ -90,8 +89,7 @@ public class H264DecodeUtil {
         int firstNaluSize = 0;
         for (int i = firstStartcodeIndex + 4; i < firstStartcodeIndex + seq.length - 4; i ++) {
             if ((0x00 == seq[i + 0]) && (0x00 == seq[i + 1]) && (0x00 == seq[i + 2]) && (0x01 == seq[i + 3])) {
-                if (firstNaluSize == 0)
-                {
+                if (firstNaluSize == 0) {
                     firstNaluSize = i - firstStartcodeIndex;
                 }
 
@@ -140,8 +138,7 @@ public class H264DecodeUtil {
         int firstNaluSize = 0;
         for (int i = firstStartcodeIndex + 4; i < firstStartcodeIndex + seq.length - 4; i ++) {
             if ((0x00 == seq[i + 0]) && (0x00 == seq[i + 1]) && (0x00 == seq[i + 2]) && (0x01 == seq[i + 3])) {
-                if (firstNaluSize == 0)
-                {
+                if (firstNaluSize == 0) {
                     firstNaluSize = i - firstStartcodeIndex;
                 }
 

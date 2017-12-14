@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,6 +29,8 @@ import com.gc.cvrapp.service.CvrServiceManager.CvrServiceConnection;
 import com.gc.cvrapp.media.Media;
 import com.gc.cvrapp.media.Media.MediaPlaybackState;
 import com.gc.cvrapp.utils.LogUtil;
+
+import org.jetbrains.annotations.Contract;
 
 import java.lang.ref.WeakReference;
 
@@ -441,6 +444,8 @@ public class PlaybackVideoActivity extends AppCompatActivity implements CvrServi
         }
     };
 
+    @NonNull
+    @Contract(pure = true)
     private String timestamp(long sampletime) {
         int ss = 1000;
         int mi = ss * 60;

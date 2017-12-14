@@ -29,6 +29,7 @@ public class CvrServiceManager implements ServiceConnection {
     private static final String TAG = "CvrServiceManager";
 
     public CvrServiceManager(Context context, int srvid) {
+        LogUtil.i(TAG, "srvid " + String.valueOf(srvid));
         mServiceId = srvid;
         mContext = context;
         mExecutor = Executors.newSingleThreadScheduledExecutor();
@@ -43,7 +44,7 @@ public class CvrServiceManager implements ServiceConnection {
         }
 
         Intent intent;
-        if (AppConfig.APP_SERVICE == mServiceId) {
+        if (AppConfig.UsbService == mServiceId) {
             intent = new Intent(mContext, UsbCvrService.class);
         } else {
             intent = new Intent(mContext, NetCvrService.class);
@@ -64,7 +65,7 @@ public class CvrServiceManager implements ServiceConnection {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         mBound = true;
-        if (AppConfig.APP_SERVICE == mServiceId) {
+        if (AppConfig.UsbService == mServiceId) {
             UsbCvrService.BinderService usbBinder = (UsbCvrService.BinderService) service;
             mService = usbBinder.getService();
         } else {

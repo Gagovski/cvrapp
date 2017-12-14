@@ -1,23 +1,26 @@
 package com.gc.cvrapp.cvr.netcvr;
 
 import com.gc.cvrapp.cvr.CvrConstants;
+import com.gc.cvrapp.utils.LogUtil;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class NetCvrManager {
 
     private static List<Socket> mSocks = new ArrayList<>();
-    private static ScheduledExecutorService mExecutor = Executors.newSingleThreadScheduledExecutor();
     private static final String TAG = "NetCvrManager";
 
     public void connect() {
-        mExecutor.execute(new ConnRunnable());
+        LogUtil.i(TAG, "net sock connect");
+        int port = CvrConstants.NetConstants.SockPortMin;
+        for (int i = 0; i < CvrConstants.NetConstants.SockCnt; i ++) {
+            ConnectThread connThread = new ConnectThread(port + i);
+            connThread.start();
+        }
     }
 
     public NetDeviceConnection openDevice() {
@@ -39,15 +42,24 @@ public class NetCvrManager {
 
     private static NetCvrManagerCallback Icallback;
 
-    private static class ConnRunnable implements Runnable {
+    private class ConnectThread extends Thread {
+        private int port;
+
+        ConnectThread(int port) {
+            this.port = port;
+        }
+
         @Override
         public void run() {
-            mSocks.clear();
-            for (int port = CvrConstants.NetConstants.SockPortMin; port <= CvrConstants.NetConstants.SockPortMax; port ++) {
+            super.run();
+
+            for (;;) {
                 try {
-                    ServerSocket serverSocket = new ServerSocket(port);
+                    ServerSocket serverSocket = new ServerSocket(this.port);
                     Socket socket = serverSocket.accept();
                     mSocks.add(socket);
+                    LogUtil.i(TAG, "net sock connected port " + String.valueOf(this.port));
+                    break;
                 } catch (IOException e) {
                     e.printStackTrace();
                     Icallback.isError();
@@ -55,7 +67,10 @@ public class NetCvrManager {
                 }
             }
 
-            Icallback.isConnect();
+            if (1 < mSocks.size()) {
+                Icallback.isConnect();
+            }
         }
     }
+
 }

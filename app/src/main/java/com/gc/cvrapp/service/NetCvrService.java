@@ -34,6 +34,7 @@ public class NetCvrService extends CvrService {
     @Override
     public void onCreate() {
         super.onCreate();
+        LogUtil.i(TAG, "onCreate");
         mNetManager = new NetCvrManager();
     }
 
@@ -86,6 +87,7 @@ public class NetCvrService extends CvrService {
     private NetCvrManager.NetCvrManagerCallback Icallback = new NetCvrManager.NetCvrManagerCallback() {
         @Override
         public void isConnect() {
+            LogUtil.i(TAG, "net sock is connected");
             mSocks = mNetManager.getSocks();
             List<NetSockEndpoint> ins = new ArrayList<>();
             NetSockEndpoint out = null;
