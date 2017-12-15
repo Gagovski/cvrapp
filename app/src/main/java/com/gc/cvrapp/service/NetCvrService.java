@@ -7,15 +7,12 @@ import android.support.annotation.Nullable;
 
 import com.gc.cvrapp.cvr.Cvr;
 import com.gc.cvrapp.cvr.Cvr.CvrListener;
-import com.gc.cvrapp.cvr.CvrConstants;
 import com.gc.cvrapp.cvr.netcvr.NetCvr;
 import com.gc.cvrapp.cvr.netcvr.NetCvrConnection;
 import com.gc.cvrapp.cvr.netcvr.NetCvrManager;
 import com.gc.cvrapp.cvr.netcvr.NetSockEndpoint;
 import com.gc.cvrapp.utils.LogUtil;
 
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 public class NetCvrService extends CvrService {
@@ -24,7 +21,7 @@ public class NetCvrService extends CvrService {
 
     private NetCvr mNetCvr;
 
-    private List<Socket> mSocks;
+    private List<NetSockEndpoint> mEndpoints;
 
     private static final String TAG = "NetCvrService";
 
@@ -88,14 +85,9 @@ public class NetCvrService extends CvrService {
         @Override
         public void isConnect() {
             LogUtil.i(TAG, "net sock is connected");
-            mSocks = mNetManager.getSocks();
-            List<NetSockEndpoint> ins = new ArrayList<>();
-            NetSockEndpoint out = null;
-            for (Socket sock : mSocks) {
-                ins.add(new NetSockEndpoint(sock, CvrConstants.NetConstants.SockDirIn));
-            }
-            out = new NetSockEndpoint(mSocks.get(0), CvrConstants.NetConstants.SockDirOut);
-            NetCvrConnection connection = new NetCvrConnection(mNetManager.openDevice(), ins, out);
+            mEndpoints = mNetManager.getEndpoints();
+
+            NetCvrConnection connection = new NetCvrConnection(mEndpoints, mEndpoints.get(0));
             mNetCvr = new NetCvr(connection);
             mNetCvr.setListener(mListener);
             mListener.onCvrAttached(mNetCvr);
@@ -103,7 +95,7 @@ public class NetCvrService extends CvrService {
 
         @Override
         public void isError() {
-            mSocks = null;
+            mEndpoints = null;
         }
     };
 }

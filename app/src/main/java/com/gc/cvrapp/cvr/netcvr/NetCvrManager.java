@@ -4,14 +4,16 @@ import com.gc.cvrapp.cvr.CvrConstants;
 import com.gc.cvrapp.utils.LogUtil;
 
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NetCvrManager {
-
-    private static List<Socket> mSocks = new ArrayList<>();
+    private static List<NetSockEndpoint> endpoints = new ArrayList<>();
     private static final String TAG = "NetCvrManager";
 
     public void connect() {
@@ -23,12 +25,8 @@ public class NetCvrManager {
         }
     }
 
-    public NetDeviceConnection openDevice() {
-        return new NetDeviceConnection();
-    }
-
-    public List<Socket> getSocks() {
-        return mSocks;
+    public List<NetSockEndpoint> getEndpoints() {
+        return endpoints;
     }
 
     public void setCallback(NetCvrManagerCallback cb) {
@@ -52,25 +50,31 @@ public class NetCvrManager {
         @Override
         public void run() {
             super.run();
+            try {
+                byte[] msg = new byte[CvrConstants.MsgSize];
+                DatagramSocket serverSocket = new DatagramSocket(this.port);
+                DatagramPacket receivePacket = new DatagramPacket(msg, CvrConstants.MsgSize);
 
-            for (;;) {
                 try {
-                    ServerSocket serverSocket = new ServerSocket(this.port);
-                    Socket socket = serverSocket.accept();
-                    mSocks.add(socket);
-                    LogUtil.i(TAG, "net sock connected port " + String.valueOf(this.port));
-                    break;
+                    serverSocket.receive(receivePacket);
+                    ByteBuffer bb = ByteBuffer.wrap(receivePacket.getData());
+                    bb.order(ByteOrder.LITTLE_ENDIAN);
+                    short   type  = bb.getShort();
+                    short   code  = bb.getShort();
+                    if ((type == CvrConstants.MsgType.MsgCommand) && (code == CvrConstants.CommandCode.ConnectCheck)) {
+                        LogUtil.i(TAG, "endpoint: port " + serverSocket.getLocalPort() + " addr " +  receivePacket.getAddress());
+                        endpoints.add(new NetSockEndpoint(serverSocket, receivePacket.getAddress(), receivePacket.getPort()));
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Icallback.isError();
-                    return;
                 }
+            } catch (SocketException e) {
+                e.printStackTrace();
             }
 
-            if (1 < mSocks.size()) {
+            if (1 < endpoints.size()) {
                 Icallback.isConnect();
             }
         }
     }
-
 }

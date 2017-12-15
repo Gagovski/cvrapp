@@ -1,31 +1,28 @@
 package com.gc.cvrapp.cvr.netcvr;
 
-import com.gc.cvrapp.cvr.CvrConstants;
-
-import java.net.Socket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 public class NetSockEndpoint {
-    private Socket mSocket;
-    private int mDirection = CvrConstants.NetConstants.SockDirOut;
+    private DatagramSocket socket;
+    private InetAddress address;
+    private int port;
 
-    public NetSockEndpoint(Socket sock, int direction) {
-        mSocket = sock;
-        mDirection = direction;
+    public NetSockEndpoint(DatagramSocket sock, InetAddress address, int port) {
+        this.socket = sock;
+        this.address = address;
+        this.port = port;
     }
 
-    public void setDirection(int direction) {
-        mDirection = direction;
+    public InetAddress getAddress() {
+        return address;
     }
 
-    public int getDirection() {
-        return mDirection;
+    public int getPort() {
+        return port;
     }
 
-    public void setSocket(Socket sock) {
-        mSocket = sock;
-    }
-
-    public Socket getSocket() {
-        return mSocket;
+    public DatagramSocket getSocket() {
+        return socket;
     }
 }
