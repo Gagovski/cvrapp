@@ -1,12 +1,14 @@
 package com.gc.cvrapp.cvr.netcvr;
 
 import com.gc.cvrapp.cvr.CvrConstants;
+import com.gc.cvrapp.utils.LogUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 public class NetDeviceConnection {
+    private static final String TAG = "NetDeviceConnection";
 
     private static void checkBounds(byte[] buffer, int start, int length) {
         final int bufferLength = (buffer != null ? buffer.length : 0);

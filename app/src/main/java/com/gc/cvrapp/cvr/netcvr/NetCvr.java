@@ -7,8 +7,13 @@ import com.gc.cvrapp.utils.LogUtil;
 public class NetCvr extends Cvr {
     private static final String TAG = "NetCvr";
 
-    public NetCvr(NetCvrConnection connection, CvrListener listener) {
+    public NetCvr(NetCvrConnection connection) {
         super(connection);
+    }
+
+    @Override
+    public void setListener(CvrListener listener) {
+        super.setListener(listener);
     }
 
     @Override

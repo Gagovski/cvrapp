@@ -540,7 +540,7 @@ public abstract class Cvr {
                 msg.clear();
                 int msgLen = connection.transferIn(object, msg.array(), CvrConstants.MsgHeaderLen);
                 if (CvrConstants.MsgHeaderLen > msgLen) {
-                    LogUtil.i(TAG, "bulkin err " + String.valueOf(msgLen));
+                    LogUtil.i(TAG, "msg header in err " + String.valueOf(msgLen));
                     mListener.onCvrError("bulkin err " + String.valueOf(msgLen));
                     isStop = true;
                     continue;

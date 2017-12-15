@@ -96,7 +96,9 @@ public class NetCvrService extends CvrService {
             }
             out = new NetSockEndpoint(mSocks.get(0), CvrConstants.NetConstants.SockDirOut);
             NetCvrConnection connection = new NetCvrConnection(mNetManager.openDevice(), ins, out);
-            mNetCvr = new NetCvr(connection, mListener);
+            mNetCvr = new NetCvr(connection);
+            mNetCvr.setListener(mListener);
+            mListener.onCvrAttached(mNetCvr);
         }
 
         @Override
