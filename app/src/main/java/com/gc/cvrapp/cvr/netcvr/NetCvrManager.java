@@ -12,10 +12,15 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Base class for managing net cvr
+ */
 public class NetCvrManager {
     private static List<NetSockEndpoint> endpoints = new ArrayList<>();
     private static final String TAG = "NetCvrManager";
 
+    /** connect cvr device
+     */
     public void connect() {
         LogUtil.i(TAG, "net sock connect");
         int port = CvrConstants.NetConstants.SockPortMin;
@@ -25,16 +30,32 @@ public class NetCvrManager {
         }
     }
 
+    /** get cvr net endpoints
+     * @return net transfer endpoints
+     */
     public List<NetSockEndpoint> getEndpoints() {
         return endpoints;
     }
 
+    /** set cvr callback
+     * @return net transfer endpoints
+     */
     public void setCallback(NetCvrManagerCallback cb) {
         Icallback = cb;
     }
 
+    /**
+     * interface Manager callback
+     */
     public interface NetCvrManagerCallback {
+        /**
+         * notify cvr device is connected
+         */
         void isConnect();
+
+        /**
+         * notify cvr device is something wrong
+         */
         void isError();
     }
 
