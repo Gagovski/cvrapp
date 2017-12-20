@@ -65,13 +65,15 @@ public class MsgCode {
     /** MsgCode: cvr is recording trip video now */
     public static final int MsgRecording        = 21;
 
+    /** MsgCode: cvr is formatting */
     public static final int MsgFormatting       = 22;
 
+    /** MsgCode: cvr format done */
     public static final int MsgFormatdone       = 23;
 
     /** MsgCode: cvr location */
-    public static final int MsgLocation         = 22;
+    public static final int MsgLocation         = 24;
 
     /** MsgCode: cvr somethings wrong happen */
-    public static final int MsgError            = 23;
+    public static final int MsgError            = 25;
 }
