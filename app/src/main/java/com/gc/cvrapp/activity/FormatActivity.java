@@ -24,6 +24,7 @@ public class FormatActivity extends AppCompatActivity implements CvrServiceConne
     private CvrServiceManager mServiceManager;
     private ImageView imgFormating;
     private AnimationDrawable mAniDraw;
+    private boolean isFormatting = false;
     private static final String TAG = "FormatActivity";
 
     @Override
@@ -62,8 +63,11 @@ public class FormatActivity extends AppCompatActivity implements CvrServiceConne
     }
 
     public void onClickFormatting(View view) {
-        mHandler.sendEmptyMessage(MsgCode.MsgFormatting);
-        mCvr.formatSD(formattingListener);
+        if (!isFormatting) {
+            isFormatting = true;
+            mHandler.sendEmptyMessage(MsgCode.MsgFormatting);
+            mCvr.formatSD(formattingListener);
+        }
     }
 
     private Handler mHandler = new FormattingHandler(this);
@@ -100,6 +104,7 @@ public class FormatActivity extends AppCompatActivity implements CvrServiceConne
         public void onFormatDone() {
             LogUtil.i(TAG, "format sdcard done");
             mHandler.sendEmptyMessage(MsgCode.MsgFormatdone);
+            isFormatting = false;
         }
     };
 }
