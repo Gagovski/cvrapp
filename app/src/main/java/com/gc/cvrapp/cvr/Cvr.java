@@ -233,7 +233,13 @@ public abstract class Cvr {
         void onUnLockFile(String item);
     }
 
+    /**
+     * interface FormattingListener for cvr format sd done
+     */
     public interface FormattingListener {
+        /**
+         * listen cvr format sd done
+         */
         void onFormatDone();
     }
 
