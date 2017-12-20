@@ -3,13 +3,11 @@ package com.gc.cvrapp.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.graphics.drawable.AnimationDrawable;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.os.Bundle;
 import android.preference.SwitchPreference;
-import android.widget.ImageView;
 
 import com.gc.cvrapp.AppConfig;
 import com.gc.cvrapp.cvr.CvrSettings;
@@ -19,8 +17,6 @@ import com.gc.cvrapp.service.CvrService;
 import com.gc.cvrapp.service.CvrServiceManager;
 import com.gc.cvrapp.service.CvrServiceManager.CvrServiceConnection;
 import com.gc.cvrapp.utils.LogUtil;
-
-import java.text.Format;
 
 public class SettingActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
         Preference.OnPreferenceClickListener, CvrServiceConnection {
