@@ -3,11 +3,13 @@ package com.gc.cvrapp.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.graphics.drawable.AnimationDrawable;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.os.Bundle;
 import android.preference.SwitchPreference;
+import android.widget.ImageView;
 
 import com.gc.cvrapp.AppConfig;
 import com.gc.cvrapp.cvr.CvrSettings;
@@ -18,7 +20,10 @@ import com.gc.cvrapp.service.CvrServiceManager;
 import com.gc.cvrapp.service.CvrServiceManager.CvrServiceConnection;
 import com.gc.cvrapp.utils.LogUtil;
 
-public class SettingActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener, Preference.OnPreferenceClickListener, CvrServiceConnection {
+import java.text.Format;
+
+public class SettingActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener,
+        Preference.OnPreferenceClickListener, CvrServiceConnection {
 
     private Cvr mCvr;
     private CvrServiceManager mServiceManager;
@@ -33,9 +38,11 @@ public class SettingActivity extends PreferenceActivity implements OnSharedPrefe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.setting);
+
         mServiceManager = new CvrServiceManager(this, AppConfig.APP_SERVICE);
         mServiceManager.setCallback(this);
         mSettings = new CvrSettings(this);
+
         initSettings();
     }
 
@@ -109,7 +116,7 @@ public class SettingActivity extends PreferenceActivity implements OnSharedPrefe
     public boolean onPreferenceClick(Preference preference) {
         String key = preference.getKey();
         if (key.equals("format_sd")) {
-            mCvr.formatSD();
+            startActivity(new Intent(this, FormatActivity.class));
         } else if (key.equals("show_log")) {
             startActivity(new Intent(this, LogActivity.class));
         } else {

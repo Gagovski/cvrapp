@@ -3,13 +3,16 @@ package com.gc.cvrapp.cvr.commands;
 
 import com.gc.cvrapp.cvr.Cvr;
 import com.gc.cvrapp.cvr.CvrConstants;
+import com.gc.cvrapp.cvr.Cvr.FormattingListener;
 
 import java.nio.ByteBuffer;
 
 public class FormatSDCommand extends Command {
+    private FormattingListener mListener;
 
-    public FormatSDCommand(Cvr cvr) {
+    public FormatSDCommand(Cvr cvr, FormattingListener listener) {
         super(cvr);
+        mListener = listener;
     }
 
     @Override
@@ -32,4 +35,9 @@ public class FormatSDCommand extends Command {
         return CvrConstants.ResponseCode.FormatSD;
     }
 
+    @Override
+    protected void decodeData(short code, int arg1) {
+        super.decodeData(code, arg1);
+        mListener.onFormatDone();
+    }
 }

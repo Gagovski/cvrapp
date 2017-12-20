@@ -24,4 +24,10 @@
     <string name="action_info">Photo info</string>
     <string name="action_photo">View photo</string>
 
+    <string name="format_description">
+        Format settings will return your sd card to its original settings.
+        In doing so, your pictures, videos, and all other files and data will
+        be lost. This operation cannot be cancelled, so please backup your data
+        before performing it.</string>
+
 </resources>

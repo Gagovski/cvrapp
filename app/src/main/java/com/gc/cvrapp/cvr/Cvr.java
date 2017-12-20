@@ -233,6 +233,10 @@ public abstract class Cvr {
         void onUnLockFile(String item);
     }
 
+    public interface FormattingListener {
+        void onFormatDone();
+    }
+
     protected void queueMsg(CvrAction command) {
         for (int i = 0; i < workerThreads.size(); i ++) {
             workerThreads.get(i).queueMsg(command);
@@ -386,10 +390,11 @@ public abstract class Cvr {
 
     /**
      * cvr format sd
+     * @param listener the cvr FormattingListener
      */
-    public void formatSD() {
+    public void formatSD(FormattingListener listener) {
         LogUtil.i(TAG, "formatSD");
-        FormatSDCommand command = new FormatSDCommand(this);
+        FormatSDCommand command = new FormatSDCommand(this, listener);
         queueMsg(command);
         mExecutor.execute(new CommandRunnable(command, mConnection));
     }

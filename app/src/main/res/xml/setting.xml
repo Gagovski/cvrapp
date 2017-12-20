@@ -14,8 +14,6 @@
             android:defaultValue="0"
             android:key="@string/key_record_voice"
             android:title="voice enable" />
-
-
         <SwitchPreference
             android:defaultValue="0"
             android:key="@string/key_log_en"
@@ -28,5 +26,6 @@
         <Preference
             android:key="show_log"
             android:title="show log" />
+
     </PreferenceCategory>
 </PreferenceScreen>

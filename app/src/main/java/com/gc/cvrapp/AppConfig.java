@@ -12,5 +12,5 @@ public class AppConfig {
     public static final int     APP_SERVICE     = UsbService;
 
     /** enable or disable app log */
-    public static boolean       APP_LOG_ENABLE  = false;
+    public static boolean       APP_LOG_ENABLE  = true;
 }

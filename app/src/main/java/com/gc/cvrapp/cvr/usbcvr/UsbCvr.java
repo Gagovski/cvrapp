@@ -84,8 +84,8 @@ public class UsbCvr extends Cvr {
     }
 
     @Override
-    public void formatSD() {
-        super.formatSD();
+    public void formatSD(FormattingListener listener) {
+        super.formatSD(listener);
     }
 
     @Override

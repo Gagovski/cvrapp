@@ -95,9 +95,9 @@ public class NetCvr extends Cvr {
     }
 
     @Override
-    public void formatSD() {
+    public void formatSD(FormattingListener listener) {
         LogUtil.i(TAG, "playbackPic");
-        super.formatSD();
+        super.formatSD(listener);
     }
 
     @Override
