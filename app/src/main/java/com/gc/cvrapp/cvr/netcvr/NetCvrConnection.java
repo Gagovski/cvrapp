@@ -76,7 +76,7 @@ public class NetCvrConnection extends CvrConnection<NetSockEndpoint> {
     }
 
     @Override
-    public int getMaxPackeInSize() {
+    public int getMaxPacketInSize() {
         return CvrConstants.NetConstants.SockPacketSize;
     }
 

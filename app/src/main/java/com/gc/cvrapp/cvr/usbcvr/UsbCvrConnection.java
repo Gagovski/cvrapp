@@ -62,7 +62,7 @@ public class UsbCvrConnection extends CvrConnection<UsbEndpoint> {
     }
 
     @Override
-    public int getMaxPackeInSize() {
+    public int getMaxPacketInSize() {
         return bulkin.get(0).getMaxPacketSize();
     }
 

@@ -52,7 +52,7 @@ public abstract class CvrConnection <E> {
      * cvr get max packet size
      * @return the max in data size
      */
-    public abstract int getMaxPackeInSize();
+    public abstract int getMaxPacketInSize();
 
     /**
      * cvr get out endpoint
